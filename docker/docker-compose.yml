@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  db:
+    image: mariadb:10.5
+    container_name: db_fastapi
+    restart: always
+    volumes:
+     - ./volumes/mariadb:/var/lib/mysql
+    environment:
+      - MARIADB_ROOT_PASSWORD=gfridnbjkdnrjkngjkrd
+      - MARIADB_USER=fastapi
+      - MARIADB_USER_PASSWORD=lkgmdrkj5rd15bdgriojroi
+      - MARIADB_DATABASE=FastApi
+  api:
+    build: ./images/python-fastapi
+    container_name: api_fastapi
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ../fastapi:/home/fastapi
