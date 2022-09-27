@@ -5,6 +5,8 @@ services:
     image: mariadb:10.5
     container_name: db_fastapi
     restart: always
+    ports:
+      - 3306:3306
     volumes:
      - ./volumes/mariadb:/var/lib/mysql
     environment:
@@ -16,7 +18,11 @@ services:
     build: ./images/python-fastapi
     container_name: api_fastapi
     restart: always
+    depends_on:
+      - db
     ports:
       - 80:80
     volumes:
       - ../fastapi:/home/fastapi
+    environment:
+      - DATABASE_URL=mysql://root:gfridnbjkdnrjkngjkrd@db:3306/FastApi
