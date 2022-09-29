@@ -1,0 +1,53 @@
+@import "mixins";
+
+$c-lightblack: #3f3f46;
+$c-black: #232428;
+$c-white: #fff;
+
+body, html {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+    background-color: $c-lightblack;
+}
+
+div, textarea {
+    box-sizing: border-box;
+    display: block;
+}
+
+#__nuxt {
+    width: 100%;
+}
+
+main {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+
+    & header {
+        height: min-content;
+        width: 100%;
+        background-color: $c-black;
+        box-sizing: border-box;
+        display: flex;
+        flex-wrap: wrap;
+        overflow: hidden;
+        justify-content: center;
+        @include padding-topbot(12px);
+        @include padding-side(18px);
+    }
+    & header a {
+        color: $c-white;
+        font-size: 120%;
+        text-decoration: none;
+        @include margin-side(12px);
+        @include hoveropacity(.7);
+    }
+}

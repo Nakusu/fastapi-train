@@ -1,6 +1,6 @@
 FROM python:3.9
 
-RUN pip install fastapi uvicorn[standard] sqlmodel mysqlclient alembic
+RUN pip install fastapi uvicorn[standard] sqlmodel mysqlclient passlib
 
 WORkDIR /home/fastapi
 

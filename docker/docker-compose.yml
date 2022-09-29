@@ -14,10 +14,28 @@ services:
       - MARIADB_USER=fastapi
       - MARIADB_USER_PASSWORD=lkgmdrkj5rd15bdgriojroi
       - MARIADB_DATABASE=FastApi
+  frontend:
+    build: ./images/nuxtjs
+    container_name: frontend_fastapi
+    restart: always
+    logging:
+     driver: "json-file"
+     options:
+      max-size: "10m"
+    depends_on:
+      - db
+    ports:
+      - 3000:3000
+    volumes:
+      - ../fastapi-frontend:/var/www/
   api:
     build: ./images/python-fastapi
     container_name: api_fastapi
     restart: always
+    logging:
+     driver: "json-file"
+     options:
+      max-size: "10m"
     depends_on:
       - db
     ports:

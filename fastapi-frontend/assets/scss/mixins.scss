@@ -1,0 +1,23 @@
+@mixin padding-topbot($val) {
+    padding-top: $val !important;
+    padding-bottom: $val !important;
+}
+@mixin padding-side($val) {
+    padding-left: $val !important;
+    padding-right: $val !important;
+}
+@mixin margin-topbot($val) {
+    margin-top: $val !important;
+    margin-bottom: $val !important;
+}
+@mixin margin-side($val) {
+    margin-left: $val !important;
+    margin-right: $val !important;
+}
+@mixin hoveropacity($opacity) {
+    transition-duration: .5s;
+    &:hover {
+        opacity: $opacity;
+        transition-duration: .5s;
+    }
+}

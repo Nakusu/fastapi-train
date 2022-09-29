@@ -1,1 +1,2 @@
 docker/volumes/mariadb/
+fastapi-frontend/node_modules
