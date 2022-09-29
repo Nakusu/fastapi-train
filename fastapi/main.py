@@ -13,17 +13,10 @@ from sqlmodel import Session
 from models.db import get_session, init_db
 from models.User import User, UserCreate
 
-import jwt
+from auth import Auth
 
 app = FastAPI()
-
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
-
-JWT_SECRET = "fastapiTrain"
-JWT_ALGORITHM = "HS256"
-
-def decodeJWT(token: str):
-    return jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+Auth = Auth("fastapiTrain", "HS256")
 
 
 @app.on_event("startup")
@@ -36,7 +29,7 @@ def read_root():
 
 @app.get("/user")
 def getUser(Authorization: str = Cookie(None)):
-    return decodeJWT(Authorization)
+    return Auth.decodeToken(Authorization)
 
 @app.get("/user/create")
 def createUser(session: Session = Depends(get_session)):
@@ -45,7 +38,7 @@ def createUser(session: Session = Depends(get_session)):
     session.commit()
     session.refresh(user)
 
-    token = jwt.encode({"user_id": user.id}, JWT_SECRET, algorithm=JWT_ALGORITHM)
+    token = Auth.encodeToken(user.id)
     response = RedirectResponse(url="/user")
     response.set_cookie(
         "Authorization",
