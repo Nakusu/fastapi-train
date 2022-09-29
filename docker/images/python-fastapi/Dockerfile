@@ -1,6 +1,6 @@
 FROM python:3.9
 
-RUN pip install fastapi uvicorn[standard] sqlmodel mysqlclient passlib
+RUN pip install fastapi uvicorn[standard] sqlmodel mysqlclient passlib PyJWT
 
 WORkDIR /home/fastapi
 

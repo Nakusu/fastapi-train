@@ -9,9 +9,6 @@ class UseBase(SQLModel):
 
 class User(UseBase, table=True):
     __tablename__ = "user"
-    __table_args__ = (
-        UniqueConstraint("email"),
-    )
 
     email: str
     password: str
