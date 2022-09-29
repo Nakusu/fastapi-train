@@ -29,10 +29,22 @@ def read_root():
 
 @app.get("/user")
 def getUser(Authorization: str = Cookie(None)):
-    return Auth.decodeToken(Authorization)
+    token = Auth.decodeToken(Authorization)
+    if token == None:
+        return HTTPException(status_code=401, detail="You are not allow to do that!")
+    return token
+
+@app.get("/user/logout")
+def logoutUser(response: Response, session: Session = Depends(get_session)):
+    response.delete_cookie("Authorization")
+    return {"You has been logout!"}
 
 @app.get("/user/create")
-def createUser(session: Session = Depends(get_session)):
+def createUser(session: Session = Depends(get_session), Authorization: str = Cookie(None)):
+    token = Auth.decodeToken(Authorization)
+    if token != None:
+        return RedirectResponse(url="/user")
+
     user = User(email="leopold.lepage@gmail.com", password=sha256_crypt.hash("Test123..//"))
     session.add(user)
     session.commit()
