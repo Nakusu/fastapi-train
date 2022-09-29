@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlmodel import SQLModel, Field, UniqueConstraint
+from sqlmodel import SQLModel, Field, UniqueConstraint, select
 
 class UseBase(SQLModel):
     id: int = Field(default=None, primary_key=True)
@@ -12,7 +12,6 @@ class User(UseBase, table=True):
 
     email: str
     password: str
-
 
 class UserCreate(UseBase):
     pass

@@ -50,4 +50,24 @@ main {
         @include margin-side(12px);
         @include hoveropacity(.7);
     }
+
+    & .content-login {
+        margin-top: 28px;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        height: min-content;
+
+        & .center {
+            width: 420px;
+            height: min-content;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+        }
+    }
+    & .content-login input {
+        @include margin-topbot(6px);
+    }
 }

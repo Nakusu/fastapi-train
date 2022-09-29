@@ -1,12 +1,20 @@
 export const state = () => ({
     user: null,
-    base_url: "http://localhost:80/",
 });
   
+export const mutations = {
+    async setUser(state, user) {
+        state.user = user;
+    }, 
+};
+
 export const actions = {
-    async getUser({ state }) {
-        await this.$axios.get(state.base_url + "user", {}, { headers: {"Access-Control-Allow-Origin": "*"} }).then((ret) => {
-            state.user = ret;
+    async getUser({ commit }) {
+        await this.$axios.get("http://api.fastapi.local/user", {withCredentials: true}).then((ret) => {
+            commit("setUser", ret.data.status_code === 401 ? null : ret.data);
+        }).catch((err) => {
+            if (err.code === 401)
+                return;
         });
     }
-}
+};
