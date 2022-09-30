@@ -32,6 +32,8 @@ services:
       max-size: "10m"
     depends_on:
       - db
+      - proxy
+      - api
     volumes:
       - ../fastapi-frontend:/var/www/
   api:
@@ -44,6 +46,7 @@ services:
       max-size: "10m"
     depends_on:
       - db
+      - proxy
     volumes:
       - ../fastapi:/home/fastapi
     environment:

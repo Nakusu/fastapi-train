@@ -57,7 +57,7 @@ def logoutUser(response: Response, Authorization: str = Cookie(None)):
     if user == None:
         return HTTPException(status_code=401, detail="You are connected!")
 
-    response.delete_cookie("Authorization")
+    response.delete_cookie("Authorization", path="/", domain="api.fastapi.local")
     return {"You has been logout!"}
 
 @app.post("/user/login")

@@ -67,6 +67,20 @@ main {
             flex-wrap: wrap;
         }
     }
+    & .content-login .user {
+        width: max-content;
+        height: min-content;
+        margin: auto;
+        overflow: hidden;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+    & .content-login .user h1 {
+        color: white;
+        font-size: 120%;
+        @include margin-side(auto);
+    }
     & .content-login input {
         @include margin-topbot(6px);
     }
