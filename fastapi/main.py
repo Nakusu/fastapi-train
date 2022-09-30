@@ -41,7 +41,7 @@ def on_startup():
 
 @app.get("/")
 def read_root():
-    return 1
+    return {"Hello world!"}
 
 @app.get("/user")
 def getUser(response: Response, Authorization: str = Cookie(None)):
@@ -49,7 +49,7 @@ def getUser(response: Response, Authorization: str = Cookie(None)):
     if user == None:
         return HTTPException(status_code=401, detail="You are connected, you cannot register another user!")
 
-    return user
+    return {"id": user.id, "email": user.email}
 
 @app.get("/user/logout")
 def logoutUser(response: Response, Authorization: str = Cookie(None)):
